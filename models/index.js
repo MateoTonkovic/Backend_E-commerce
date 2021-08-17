@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
 // se crean los modelos, aun no estan vinculados
 const Role = require("./Role")(sequelize, Model, DataTypes);
 const User = require("./User")(sequelize, Model, DataTypes);
-const Product = require("./Article")(sequelize, Model, DataTypes);
+// const Product = require("./Article")(sequelize, Model, DataTypes);
 // const Comment = require("./Comment")(sequelize, Model, DataTypes);
 
 //vinculamos los modelos
@@ -28,5 +28,5 @@ module.exports = {
   sequelize,
   Role,
   User,
-  Product,
+  // Product,
 };
