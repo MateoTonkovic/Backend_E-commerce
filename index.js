@@ -8,8 +8,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
 app.use(routes);
 
-app.listen(process.env.DB_PORT, console.log(`Servidor en puerto ${process.env.DB_PORT}`));
+app.listen(
+  process.env.DB_PORT,
+  console.log(`Servidor en puerto ${process.env.DB_PORT}`)
+);
