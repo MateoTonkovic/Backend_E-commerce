@@ -12,6 +12,9 @@ module.exports = async () => {
       lastname: faker.name.lastName(),
       email: faker.internet.email(),
       username: faker.internet.userName(),
+      adresses: faker.adress.streetAddress(),
+      phonenumbers: faker.phone.phoneNumber(),
+      orderlist: [],
     });
   }
 
