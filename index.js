@@ -12,4 +12,4 @@ app.set("view engine", "ejs");
 
 app.use(routes);
 
-app.listen(port, console.log(`Servidor en puerto ${port}`));
+app.listen(process.env.DB_PORT, console.log(`Servidor en puerto ${process.env.DB_PORT}`));

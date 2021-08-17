@@ -1,6 +1,8 @@
 module.exports = {
   index: (req, res) => {},
-  store: (req, res) => {},
+  store: (req, res) => {
+    
+  },
   show: (req, res) => {},
   update: (req, res) => {},
   destroy: (req, res) => {},
