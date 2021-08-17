@@ -1,6 +1,6 @@
 const faker = require("faker");
 const { User } = require("../models");
-
+const _ = require("lodash");
 faker.locale = "en";
 
 module.exports = async () => {
@@ -14,6 +14,7 @@ module.exports = async () => {
       adresses: faker.address.streetAddress(),
       phonenumbers: faker.phone.phoneNumber(),
       password: faker.internet.password(),
+      roleId: _.random(1, 2),
       // orderlist: [],
     });
   }
