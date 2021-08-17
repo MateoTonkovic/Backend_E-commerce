@@ -11,8 +11,7 @@ module.exports = async () => {
       firstname: faker.name.findName(),
       lastname: faker.name.lastName(),
       email: faker.internet.email(),
-      username: faker.internet.userName(),
-      adresses: faker.adress.streetAddress(),
+      address: faker.address.streetAddress(),
       phonenumbers: faker.phone.phoneNumber(),
       orderlist: [],
     });
