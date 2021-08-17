@@ -19,12 +19,12 @@ module.exports = (sequelize, Model, DataTypes) => {
       lastname: {
         type: DataTypes.STRING,
       },
-      email: {
-        type: DataTypes.STRING,
-        Validite: { isEmail: true },
-        allowNull: false,
-        unique: true,
-      },
+      // email: {
+      //   type: DataTypes.STRING,
+      //   Validite: { isEmail: true },
+      //   allowNull: false,
+      //   unique: true,
+      // },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -37,7 +37,7 @@ module.exports = (sequelize, Model, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      orderlist: [],
+      // orderlist: [],
     },
     {
       sequelize,
@@ -51,18 +51,6 @@ module.exports = (sequelize, Model, DataTypes) => {
   return User;
 };
 
-class User {
-  findAll() {}
 
-  findOne() {}
-
-  save() {}
-
-  delete() {}
-
-  insert() {}
-
-  update() {}
-}
 
 //Estas funciones son las mismas para varios models por ejemplo Article, Vendor, etc.

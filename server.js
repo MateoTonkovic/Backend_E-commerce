@@ -11,6 +11,6 @@ app.use(express.static("public"));
 
 app.use(routes);
 
-//dbInitialSetup(); // Crea tablas e inserta datos de prueba.
+dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
 app.listen(process.env.DB_PORT, console.log(`Servidor en puerto ${process.env.DB_PORT}`));
