@@ -1,7 +1,7 @@
 module.exports = (sequelize, Model, DataTypes) => {
-  class User extends Model {}
+  class Product extends Model {}
 
-  User.init(
+  Product.init(
     {
       name: {
         type: DataTypes.STRING,
@@ -49,24 +49,5 @@ module.exports = (sequelize, Model, DataTypes) => {
   //   user.password = bcrypt.hashSync(user.password, 10);
   // });
 
-  return User;
+  return Product;
 };
-
-// class User {
-//   findAll() {}
-
-//   findOne() {}
-
-//   save() {}
-
-//   delete() {}
-
-//   insert() {}
-
-//   update() {}
-// }
-
-// module.exports = User;
-
-// //Estas funciones son las mismas para varios models por ejemplo Article, Vendor, etc.
-// //
