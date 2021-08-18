@@ -1,8 +1,8 @@
 const { User } = require("../models");
 
 async function store(req, res) {
-  User.create({ name: req.body.name });
-  res.status(200);
+  User.create(req.body);
+  res.sendStatus(200);
 }
 
 module.exports = { store };
