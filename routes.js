@@ -6,6 +6,7 @@ const router = express.Router();
 // const getUsers = require("./mysqlConection");
 
 router.post("/api/register", userController.store);
+router.post("/api/login", userController.login);
 // router.get("/", usersController.home);
 // router.get("/usuarios", usersController.index);
 // router.post("/usuarios", usersController.create);

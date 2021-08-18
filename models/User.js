@@ -29,7 +29,7 @@ module.exports = (sequelize, Model, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      adresses: {
+      addresses: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -45,9 +45,9 @@ module.exports = (sequelize, Model, DataTypes) => {
       modelName: "user",
     }
   );
-  // User.beforeCreate(async (user, options) => {
-  //   user.password = await bcrypt.hash(user.password, 10);
-  // });
+  User.beforeCreate(async (user, options) => {
+    user.password = await bcrypt.hash(user.password, 10);
+  });
 
   return User;
 };
