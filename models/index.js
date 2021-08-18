@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
 const Role = require("./Role")(sequelize, Model, DataTypes);
 const User = require("./User")(sequelize, Model, DataTypes);
 const Category = require("./User")(sequelize, Model, DataTypes);
-const Product = require("./Article")(sequelize, Model, DataTypes);
+const Product = require("./Product")(sequelize, Model, DataTypes);
 // const Comment = require("./Comment")(sequelize, Model, DataTypes);
 
 //vinculamos los modelos
