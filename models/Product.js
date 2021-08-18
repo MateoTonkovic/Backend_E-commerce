@@ -20,10 +20,6 @@ module.exports = (sequelize, Model, DataTypes) => {
         type: DataTypes.BIGINT,
         allowNull: false,
       },
-      category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       bestproduct: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

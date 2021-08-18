@@ -14,7 +14,6 @@ module.exports = async () => {
       adresses: faker.address.streetAddress(),
       phonenumbers: faker.phone.phoneNumber(),
       password: faker.internet.password(),
-      roleId: _.random(1, 2),
       // orderlist: [],
     });
   }

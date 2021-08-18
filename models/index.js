@@ -12,9 +12,9 @@ const sequelize = new Sequelize(
 );
 
 // se crean los modelos, aun no estan vinculados
-const Role = require("./Role")(sequelize, Model, DataTypes);
+// const Role = require("./Role")(sequelize, Model, DataTypes);
 const User = require("./User")(sequelize, Model, DataTypes);
-const Category = require("./User")(sequelize, Model, DataTypes);
+const Category = require("./Category")(sequelize, Model, DataTypes);
 const Product = require("./Product")(sequelize, Model, DataTypes);
 // const Comment = require("./Comment")(sequelize, Model, DataTypes);
 
@@ -22,15 +22,11 @@ const Product = require("./Product")(sequelize, Model, DataTypes);
 // Article.hasMany(Comment);
 // Comment.belongsTo(Article);
 
-Role.hasMany(User);
-User.belongsTo(Role);
-
 Category.hasMany(Product);
 Product.belongsTo(Category);
 
 module.exports = {
   sequelize,
-  Role,
   User,
   Category,
   Product,
