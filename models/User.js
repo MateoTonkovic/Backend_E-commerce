@@ -37,6 +37,7 @@ module.exports = (sequelize, Model, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
       // orderlist: [],
     },
     {
@@ -50,7 +51,5 @@ module.exports = (sequelize, Model, DataTypes) => {
 
   return User;
 };
-
-
 
 //Estas funciones son las mismas para varios models por ejemplo Article, Vendor, etc.

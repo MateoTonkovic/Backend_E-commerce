@@ -1,11 +1,11 @@
 const express = require("express");
-const templateController = require("./controllers/userController");
+const userController = require("./controllers/userController");
 const router = express.Router();
 // const templateCotroller = require("./controllers/templateCotroller");
 
 // const getUsers = require("./mysqlConection");
 
-router.post("/api/register", templateController.store);
+router.post("/api/register", userController.store);
 // router.get("/", usersController.home);
 // router.get("/usuarios", usersController.index);
 // router.post("/usuarios", usersController.create);
