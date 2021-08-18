@@ -13,7 +13,8 @@ module.exports = async () => {
       email: faker.internet.email(),
       adresses: faker.address.streetAddress(),
       phonenumbers: faker.phone.phoneNumber(),
-      password: faker.internet.password(),
+      password: "admin123",
+
       // orderlist: [],
     });
   }
