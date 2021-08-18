@@ -18,6 +18,11 @@ async function login(req, res) {
   res.json({ user: user, accesToken: token });
 }
 
+async function update(req, res) {
+  await User.update(req.body, {
+    where: { email: req.body.email },
+  });
+  res.sendStatus(200);
+}
 
-
-module.exports = { store, login };
+module.exports = { store, login, update };

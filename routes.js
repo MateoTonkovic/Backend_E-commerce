@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post("/api/register", userController.store);
 router.post("/api/login", userController.login);
+router.post("/api/update", userController.update);
 // router.get("/", usersController.home);
 // router.get("/usuarios", usersController.index);
 // router.post("/usuarios", usersController.create);
