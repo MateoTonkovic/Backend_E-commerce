@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 routes(app)
-// app.use(routes);
+
 
 //dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 

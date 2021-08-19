@@ -38,10 +38,10 @@ async function update(req, res) {
 
 async function destroy(req, res) {
   const admin = await Admin.findByPk(req.user.id);
-  console.log(admin.id + req.user.id);
   if (admin.id === req.user.id) {
     await User.destroy({ where: { id: req.body.id } });
-    res.sendStatus(200);
+    console.log("eaaaaa");
+    return res.sendStatus(200);
   }
 
   if (Number(req.user.id) !== Number(req.body.id)) return res.sendStatus(403);
