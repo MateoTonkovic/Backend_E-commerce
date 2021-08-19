@@ -52,5 +52,35 @@ const update = async (req, res) => {
   if (!admin) {
     return res.sendStatus(403);
   }
+  const form = formidable({
+    multiples: false,
+    uploadDir: "./public/img",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    const path = require("path");
+    const imgName = path.basename(files.photo.path);
+    if (files.photo.name === "") {
+      const fs = require("fs");
+      fs.unlink(files.photo.path, () => {});
+    }
+    const product = await Product.update(
+      {
+        name: fields.name,
+        description: fields.description,
+        photo: "/img/" + imgName,
+        stock: fields.stock,
+        bestproduct: fields.bestproducts,
+        slug: slugify(fields.name, { replacement: "-" }),
+        price: fields.price,
+      },
+      {
+        where: {
+          id: req.user.id,
+        },
+      }
+    );
+    res.json(product);
+  });
 };
 module.exports = { store, index, destroy, update };
