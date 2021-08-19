@@ -1,8 +1,10 @@
 const productController = require("../controllers/productController");
 const express = require("express");
 const productRoutes = express.Router();
+const tokenVerification = require("../middleware/authMiddleware");
 
 productRoutes.get("/", productController.index);
-productRoutes.post("/create", productController.store);
+productRoutes.post("/", productController.store);
+productRoutes.post("/destroy", tokenVerification, productController.destroy);
 
 module.exports = productRoutes;
