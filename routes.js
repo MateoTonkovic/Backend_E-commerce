@@ -17,6 +17,7 @@ router.post("/api/update", userController.update);
 // router.post("/usuarios/modificar", usersController.edit);
 
 //RUTAS DE PRODUCTOS
+router.get("/products", productController.index);
 router.post("/products", productController.store);
 
 module.exports = router;

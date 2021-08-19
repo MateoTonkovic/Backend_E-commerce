@@ -7,4 +7,9 @@ const store = async (req, res) => {
   res.json(req.body);
 };
 
-module.exports = { store };
+const index = async (req, res) => {
+  const product = await Product.findAll();
+  res.json(product);
+};
+
+module.exports = { store, index };
