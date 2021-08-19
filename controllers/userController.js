@@ -8,7 +8,7 @@ async function store(req, res) {
     { id: user.id, email: user.email },
     process.env.JWT_SECRET
   );
-  res.json({ user: user, accesToken: token });
+  res.json({ accesToken: token });
 }
 
 async function login(req, res) {
@@ -23,7 +23,7 @@ async function login(req, res) {
     process.env.JWT_SECRET
   );
 
-  res.json({ user, accesToken: token });
+  res.json({ accesToken: token });
 }
 
 async function update(req, res) {
