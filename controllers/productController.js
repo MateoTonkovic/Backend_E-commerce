@@ -59,24 +59,26 @@ const update = async (req, res) => {
   });
   form.parse(req, async (err, fields, files) => {
     const path = require("path");
-    const imgName = path.basename(files.photo.path);
-    if (files.photo.name === "") {
-      const fs = require("fs");
-      fs.unlink(files.photo.path, () => {});
-    }
+    // const imgName = path.basename(files.photo.path);
+    // if (files.photo.name === "") {
+    //   const fs = require("fs");
+    //   fs.unlink(files.photo.path, () => {});
+    // }
+    console.log(fields);
+
     const product = await Product.update(
       {
         name: fields.name,
         description: fields.description,
-        photo: "/img/" + imgName,
+        // photo: "/img/" + imgName,
         stock: fields.stock,
         bestproduct: fields.bestproducts,
-        slug: slugify(fields.name, { replacement: "-" }),
+        // slug: slugify(fields.name, { replacement: "-" }),
         price: fields.price,
       },
       {
         where: {
-          id: req.user.id,
+          id: Number(fields.id),
         },
       }
     );
