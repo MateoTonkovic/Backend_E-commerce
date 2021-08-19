@@ -9,7 +9,7 @@
 // };
 const jwt = require("jsonwebtoken");
 
-const checkSession = (req, res, next) => {
+const tokenVerification = (req, res, next) => {
   const tokenBearer = req.headers["authorization"];
   const bearer = tokenBearer.split(" ");
   const token = bearer[1];
@@ -26,4 +26,4 @@ const checkSession = (req, res, next) => {
   return next();
 };
 
-module.exports = checkSession;
+module.exports = tokenVerification;
