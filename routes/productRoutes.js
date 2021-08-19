@@ -5,6 +5,7 @@ const tokenVerification = require("../middleware/authMiddleware");
 
 productRoutes.get("/", productController.index);
 productRoutes.post("/", productController.store);
-productRoutes.post("/destroy", tokenVerification, productController.destroy);
+productRoutes.delete("/", tokenVerification, productController.destroy);
+productRoutes.patch("/", tokenVerification, productController.update);
 
 module.exports = productRoutes;

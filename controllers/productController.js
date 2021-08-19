@@ -47,4 +47,43 @@ const destroy = async (req, res) => {
   await Product.destroy({ where: { id: req.body.id } });
   return res.sendStatus(200);
 };
-module.exports = { store, index, destroy };
+
+const update = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
+  const form = formidable({
+    multiples: false,
+    uploadDir: "./public/img",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    const path = require("path");
+    // const imgName = path.basename(files.photo.path);
+    // if (files.photo.name === "") {
+    //   const fs = require("fs");
+    //   fs.unlink(files.photo.path, () => {});
+    // }
+    console.log(fields);
+
+    const product = await Product.update(
+      {
+        name: fields.name,
+        description: fields.description,
+        // photo: "/img/" + imgName,
+        stock: fields.stock,
+        bestproduct: fields.bestproducts,
+        // slug: slugify(fields.name, { replacement: "-" }),
+        price: fields.price,
+      },
+      {
+        where: {
+          id: Number(fields.id),
+        },
+      }
+    );
+    res.json(product);
+  });
+};
+module.exports = { store, index, destroy, update };

@@ -11,8 +11,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-routes(app)
-
+routes(app);
 
 //dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
