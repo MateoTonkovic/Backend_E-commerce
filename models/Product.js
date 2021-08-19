@@ -23,6 +23,7 @@ module.exports = (sequelize, Model, DataTypes) => {
       bestproduct: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       slug: {
         type: DataTypes.STRING,

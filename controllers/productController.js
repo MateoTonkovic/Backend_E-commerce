@@ -1,5 +1,6 @@
 const { Admin, Product, User } = require("../models");
 const formidable = require("formidable");
+const slugify = require("slugify");
 
 const store = async (req, res) => {
   const form = formidable({
@@ -8,12 +9,11 @@ const store = async (req, res) => {
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    console.log(files.image);
     const path = require("path");
-    const imgName = path.basename(files.image.path);
-    if (files.image.name === "") {
+    const imgName = path.basename(files.photo.path);
+    if (files.photo.name === "") {
       const fs = require("fs");
-      fs.unlink(files.image.path, () => {});
+      fs.unlink(files.photo.path, () => {});
     }
 
     // const [user, created] = await User.findOrCreate({
@@ -25,6 +25,7 @@ const store = async (req, res) => {
     //     lastname: fields.lastname,
     //   },
     // });
+
     const product = await Product.create(
       {
         name: fields.name,
@@ -32,7 +33,7 @@ const store = async (req, res) => {
         photo: "/img/" + imgName,
         stock: fields.stock,
         bestproduct: fields.bestproducts,
-        slug: fields.slug,
+        slug: slugify(fields.name, { replacement: "-" }),
         price: fields.price,
       },
       { new: true }
