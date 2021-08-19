@@ -1,6 +1,7 @@
-const { User, Admin } = require("../models");
+const { Admin } = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
 
 async function login(req, res) {
   const admin = await Admin.findOne({ where: { email: req.body.email } });
