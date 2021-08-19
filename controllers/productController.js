@@ -16,16 +16,6 @@ const store = async (req, res) => {
       fs.unlink(files.photo.path, () => {});
     }
 
-    // const [user, created] = await User.findOrCreate({
-    //   where: {
-    //     email: fields.email,
-    //   },
-    //   defaults: {
-    //     firstname: fields.firstname,
-    //     lastname: fields.lastname,
-    //   },
-    // });
-
     const product = await Product.create(
       {
         name: fields.name,

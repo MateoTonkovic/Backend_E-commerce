@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 async function login(req, res) {
   const admin = await Admin.findOne({ where: { email: req.body.email } });
   if (!admin) return res.sendStatus(404);
-  console.log(req.body.password);
+ 
   if (!bcrypt.compareSync(req.body.password, admin.password))
     return res.sendStatus(403);
 
