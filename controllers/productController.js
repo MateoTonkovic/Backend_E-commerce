@@ -15,17 +15,6 @@ const store = async (req, res) => {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
-
-    // const [user, created] = await User.findOrCreate({
-    //   where: {
-    //     email: fields.email,
-    //   },
-    //   defaults: {
-    //     firstname: fields.firstname,
-    //     lastname: fields.lastname,
-    //   },
-    // });
-
     const product = await Product.create(
       {
         name: fields.name,
@@ -57,4 +46,11 @@ const destroy = async (req, res) => {
   await Product.destroy({ where: { id: req.body.id } });
   return res.sendStatus(200);
 };
-module.exports = { store, index, destroy };
+
+const update = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
+};
+module.exports = { store, index, destroy, update };
