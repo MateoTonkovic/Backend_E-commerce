@@ -37,6 +37,10 @@ const index = async (req, res) => {
   const product = await Product.findAll();
   res.json(product);
 };
+const show = async (req, res) => {
+  const product = await Product.find(req.params.slug);
+  res.status(200).json(product);
+};
 
 const destroy = async (req, res) => {
   const admin = await Admin.findByPk(req.user.id);
@@ -86,4 +90,4 @@ const update = async (req, res) => {
     res.json(product);
   });
 };
-module.exports = { store, index, destroy, update };
+module.exports = { store, index, destroy, update, show };
