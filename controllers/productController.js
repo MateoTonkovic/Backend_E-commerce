@@ -38,7 +38,7 @@ const index = async (req, res) => {
   res.json(product);
 };
 const show = async (req, res) => {
-  const product = await Product.find(req.params.slug);
+  const product = await Product.findOne({ where: { slug: req.params.slug } });
   res.status(200).json(product);
 };
 
