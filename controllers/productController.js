@@ -20,7 +20,7 @@ const store = async (req, res) => {
       {
         name: fields.name,
         description: fields.description,
-        photo: "/img/" + imgName,
+        photo: imgName,
         stock: fields.stock,
         bestproduct: fields.bestproduct,
         slug: slugify(fields.name, { replacement: "-" }),

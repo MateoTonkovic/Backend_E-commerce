@@ -5,7 +5,7 @@ module.exports = async () => {
     {
       name: "Adidas A87",
       description: "Championes para correr Adidas con suela de caucho.",
-      photo: "/img/adidas.png",
+      photo: "adidas.png",
       price: 50,
       stock: 40,
       bestproduct: true,
@@ -15,7 +15,7 @@ module.exports = async () => {
     {
       name: "Chinelas Adidas",
       description: "Chinelas Adidas rosadas, muy confortables.",
-      photo: "/img/chinelasadidas.png",
+      photo: "chinelasadidas.png",
       price: 20,
       stock: 100,
       bestproduct: true,
@@ -26,7 +26,7 @@ module.exports = async () => {
       name: "Zapatos de futbol Ziptop",
       description:
         "Calzado para football con tapones de metal, aerodinámicos y ergoómicos.",
-      photo: "/img/football2.png",
+      photo: "football2.png",
       price: 80,
       stock: 50,
       bestproduct: true,
@@ -36,7 +36,7 @@ module.exports = async () => {
     {
       name: "Zapatos de futbol Adidas",
       description: "Calzado para football, aerodinámicos y ergoómicos.",
-      photo: "/img/football.png",
+      photo: "football.png",
       price: 100,
       stock: 20,
       bestproduct: false,
