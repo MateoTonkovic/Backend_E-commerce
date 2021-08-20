@@ -79,7 +79,7 @@ const update = async (req, res) => {
       },
       {
         where: {
-          id: Number(fields.id),
+          id: fields.id,
         },
       }
     );
