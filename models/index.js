@@ -26,7 +26,8 @@ User.hasMany(Order);
 Order.belongsTo(User);
 
 Product.hasMany(Order);
-Order.belongsToMany(Product, { through: "Product_Order" });
+Order.belongsToMany(Product, { through: "Order_Product" });
+// Product.belongsToMany(Order, { through: "Order_Product" });
 
 module.exports = {
   sequelize,
