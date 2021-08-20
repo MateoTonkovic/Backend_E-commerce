@@ -6,6 +6,7 @@ module.exports = (sequelize, Model, DataTypes) => {
       state: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "sin pagar", // pago, enviado, entregado
       },
     },
     {
