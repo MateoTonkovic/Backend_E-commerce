@@ -2,8 +2,10 @@ const { Category } = require("../models");
 
 module.exports = async () => {
   const categoria = [
-    { name: "calzado", slug: "calzado" },
-    { name: "vestimenta deportiva", slug: "vestimenta-deportiva" },
+    { name: "Damas", slug: "damas" },
+    { name: "Hombres", slug: "hombres" },
+    { name: "Deportes", slug: "deportes" },
+    { name: "zapatos", slug: "zapatos" },
   ];
 
   await Category.bulkCreate(categoria);

@@ -78,7 +78,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "heel-trainers-converse",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Championes Reebok",
@@ -144,7 +144,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "zapatos-2",
-      categoryId: 1,
+      categoryId: 4,
     },
     {
       name: "Zapatos 3",
@@ -166,7 +166,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-4",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
       name: "Zapatos Balenciaga",
@@ -199,7 +199,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "trainers-nike",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
       name: "Trainers Nike 2",
@@ -265,7 +265,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "zapatos-tommy-2",
-      categoryId: 1,
+      categoryId: 2,
     },
   ];
 
