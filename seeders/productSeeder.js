@@ -172,7 +172,7 @@ module.exports = async () => {
       name: "Zapatos Balenciaga",
       description: "Calzado para football, aerodinámicos y ergonómicos.",
       photo:
-        "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/balencia1.png",
+        "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/balenciaga1.png",
       price: 100,
       stock: 20,
       bestproduct: false,
