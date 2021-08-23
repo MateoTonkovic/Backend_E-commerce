@@ -22,7 +22,7 @@
     },
     {
       "name": "Zapatos de futbol Ziptop",
-      "description": "Calzado para football con tapones de metal, aerodinámicos y ergoómicos.",
+      "description": "Calzado para football con tapones de metal, aerodinámicos y ergonómicos.",
       "photo": "/img/football2.png",
       "price": 80,
       "stock": 50,
@@ -32,7 +32,7 @@
     },
     {
       "name": "Zapatos de futbol Adidas",
-      "description": "Calzado para football, aerodinámicos y ergoómicos.",
+      "description": "Calzado para football, aerodinámicos y ergonómicos.",
       "photo": "/img/football.png",
       "price": 100,
       "stock": 20,
