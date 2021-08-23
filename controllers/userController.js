@@ -14,7 +14,6 @@ async function store(req, res) {
 async function login(req, res) {
   const user = await User.findOne({ where: { email: req.body.email } });
   if (!user) return res.sendStatus(404);
-  console.log(req.body.password);
   if (!bcrypt.compareSync(req.body.password, user.password))
     return res.sendStatus(403);
 
@@ -40,7 +39,6 @@ async function destroy(req, res) {
   const admin = await Admin.findByPk(req.user.id);
   if (admin.id === req.user.id) {
     await User.destroy({ where: { id: req.body.id } });
-    console.log("eaaaaa");
     return res.sendStatus(200);
   }
 
@@ -49,4 +47,10 @@ async function destroy(req, res) {
   res.sendStatus(200);
 }
 
-module.exports = { store, login, update, destroy };
+async function show(req, res) {
+  console.log(req.user);
+  const user = await User.findByPk(req.user.id);
+  res.json(user);
+}
+
+module.exports = { store, login, update, destroy, show };

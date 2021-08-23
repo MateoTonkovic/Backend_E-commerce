@@ -3,6 +3,10 @@ const formidable = require("formidable");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   const form = formidable({
     multiples: false,
     uploadDir: "./public/img",
@@ -15,7 +19,6 @@ const store = async (req, res) => {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
-    console.log(fields.bestproduct);
     const product = await Product.create(
       {
         name: fields.name,
@@ -69,7 +72,6 @@ const update = async (req, res) => {
     //   const fs = require("fs");
     //   fs.unlink(files.photo.path, () => {});
     // }
-    console.log(fields);
 
     const product = await Product.update(
       {

@@ -7,5 +7,6 @@ userRouter.post("/register", userController.store);
 userRouter.post("/login", userController.login);
 userRouter.post("/update", tokenVerification, userController.update);
 userRouter.post("/destroy", tokenVerification, userController.destroy);
+userRouter.get("/", tokenVerification, userController.show);
 
 module.exports = userRouter;
