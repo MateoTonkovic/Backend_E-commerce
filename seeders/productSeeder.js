@@ -11,7 +11,7 @@ module.exports = async () => {
       stock: 40,
       bestproduct: true,
       slug: "adidas-a87",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Chinelas Adidas",
@@ -22,7 +22,7 @@ module.exports = async () => {
       stock: 100,
       bestproduct: true,
       slug: "chinelas-adidas",
-      categoryId: 2,
+      categoryId: 1,
     },
     {
       name: "Zapatos de futbol Ziptop",
@@ -34,7 +34,7 @@ module.exports = async () => {
       stock: 50,
       bestproduct: true,
       slug: "zapatos-de-futbol-ziptop",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Zapatos de futbol Adidas",
@@ -45,7 +45,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-de-futbol-adidas",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Zapatos de Golf",
@@ -56,7 +56,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "zapatos-de-golf",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Heel Trainers Nike",
@@ -78,7 +78,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "heel-trainers-converse",
-      categoryId: 3,
+      categoryId: 1,
     },
     {
       name: "Championes Reebok",
@@ -100,7 +100,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "running-sneakers",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
       name: "Trainer JWT",
@@ -122,7 +122,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos",
-      categoryId: 1,
+      categoryId: 4,
     },
     {
       name: "Zapatos 1",
@@ -133,7 +133,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-1",
-      categoryId: 1,
+      categoryId: 4,
     },
     {
       name: "Zapatos 2",
@@ -155,7 +155,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "zapatos-3",
-      categoryId: 1,
+      categoryId: 4,
     },
     {
       name: "Zapatos 4",
@@ -166,7 +166,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-4",
-      categoryId: 2,
+      categoryId: 4,
     },
     {
       name: "Zapatos Balenciaga",
@@ -177,7 +177,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "zapatos-balenciaga",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
       name: "Zapatos Balenciaga 2",
@@ -188,7 +188,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-balenciaga-2",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
       name: "Trainers Nike",
@@ -199,7 +199,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "trainers-nike",
-      categoryId: 2,
+      categoryId: 3,
     },
     {
       name: "Trainers Nike 2",
@@ -210,7 +210,7 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "trainers-nike-2",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
       name: "Medias Nike",
@@ -221,10 +221,10 @@ module.exports = async () => {
       stock: 20,
       bestproduct: false,
       slug: "medias-nike",
-      categoryId: 1,
+      categoryId: 3,
     },
     {
-      name: "Zapatos prada",
+      name: "Zapatilla prada",
       description: "Calzado para football, aerodinámicos y ergonómicos.",
       photo:
         "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/preada.png",
@@ -232,10 +232,10 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-prada",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
-      name: "Zapatos Prada 2",
+      name: "Zapatilla Prada 2",
       description: "Calzado para football, aerodinámicos y ergonómicos.",
       photo:
         "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/prada2.png",
@@ -243,10 +243,10 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-prada-2",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
-      name: "Zapatos Tommy",
+      name: "Zapatilla Tommy",
       description: "Calzado para football, aerodinámicos y ergonómicos.",
       photo:
         "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/tommyH.png",
@@ -254,10 +254,10 @@ module.exports = async () => {
       stock: 20,
       bestproduct: true,
       slug: "zapatos-tommy",
-      categoryId: 1,
+      categoryId: 2,
     },
     {
-      name: "Zapatos Tommy 2",
+      name: "Zapatilla Tommy 2",
       description: "Calzado para football, aerodinámicos y ergonómicos.",
       photo:
         "https://unyvfpzstnadbdhkxhbb.supabase.in/storage/v1/object/public/papos.photos/tommyH2.png",
