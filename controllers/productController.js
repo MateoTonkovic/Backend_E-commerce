@@ -79,7 +79,7 @@ const update = async (req, res) => {
         description: fields.description,
         // photo: "/img/" + imgName,
         stock: fields.stock,
-        bestproduct: fields.bestproducts,
+        bestproduct: fields.bestproduct,
         // slug: slugify(fields.name, { replacement: "-" }),
         price: fields.price,
       },
