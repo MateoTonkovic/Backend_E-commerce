@@ -4,23 +4,16 @@ const bcrypt = require("bcryptjs");
 
 async function store(req, res) {
   const user = await User.create(req.body);
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_SECRET
-  );
+  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
   res.json({ accesToken: token });
 }
 
 async function login(req, res) {
   const user = await User.findOne({ where: { email: req.body.email } });
   if (!user) return res.sendStatus(404);
-  if (!bcrypt.compareSync(req.body.password, user.password))
-    return res.sendStatus(403);
+  if (!bcrypt.compareSync(req.body.password, user.password)) return res.sendStatus(403);
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_SECRET
-  );
+  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
 
   res.json({ accesToken: token });
 }
@@ -48,7 +41,6 @@ async function destroy(req, res) {
 }
 
 async function show(req, res) {
-  console.log(req.user);
   const user = await User.findByPk(req.user.id);
   res.json(user);
 }
