@@ -13,7 +13,7 @@ app.use(express.json());
 
 routes(app);
 
-dbInitialSetup(); // Crea tablas e inserta datos de prueba.
+//dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
 app.listen(
   process.env.APP_PORT,
