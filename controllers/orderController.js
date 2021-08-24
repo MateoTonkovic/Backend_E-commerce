@@ -1,16 +1,24 @@
-const { Admin, Order, User } = require("../models");
+const { Admin, Order, Order_Product, User } = require("../models");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
+  const user = User.update({ where: { id: req.user.id } });
   const order = await Order.create(
     {
       state: "sin pagar",
       userId: req.user.id,
-      address: req.body.user.addresses,
-      products: req.body.products,
     },
     { new: true }
   );
+  req.body.products.map((product) => {
+     Order_Product.create({
+      orderId: order.id,
+      productId: product.id,
+      qty: product.qty,
+      unitPrice: product.price,
+    });
+  });
+
   res.json(order);
   /*     sendMail(fields.title, fields.content); */
 };
@@ -50,4 +58,6 @@ const update = async (req, res) => {
   );
   res.json(order);
 };
+
+
 module.exports = { store, index, destroy, update };
