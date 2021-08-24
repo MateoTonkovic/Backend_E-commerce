@@ -2,7 +2,7 @@ const { Admin, Order, Order_Product, User } = require("../models");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
-  const user = User.update({ where: { id: req.user.id } });
+  await User.update(req.body.user, { where: { id: req.user.id } });
   const order = await Order.create(
     {
       state: "sin pagar",
@@ -11,7 +11,7 @@ const store = async (req, res) => {
     { new: true }
   );
   req.body.products.map((product) => {
-     Order_Product.create({
+    Order_Product.create({
       orderId: order.id,
       productId: product.id,
       qty: product.qty,
@@ -58,6 +58,5 @@ const update = async (req, res) => {
   );
   res.json(order);
 };
-
 
 module.exports = { store, index, destroy, update };

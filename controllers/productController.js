@@ -46,11 +46,12 @@ const show = async (req, res) => {
 };
 
 const destroy = async (req, res) => {
+  console.log(req.body.id);
   const admin = await Admin.findByPk(req.user.id);
   if (!admin) {
     return res.sendStatus(403);
   }
-  // await User.destroy({ where: { id: req.body.id } });
+
   await Product.destroy({ where: { id: req.body.id } });
   return res.sendStatus(200);
 };
