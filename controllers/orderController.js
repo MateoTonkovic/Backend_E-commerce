@@ -4,9 +4,10 @@ const slugify = require("slugify");
 const store = async (req, res) => {
   const order = await Order.create(
     {
-      state: "",
+      state: "sin pagar",
       userId: req.user.id,
-      productId: req.body.product,
+      address: req.body.user.addresses,
+      products: req.body.products,
     },
     { new: true }
   );

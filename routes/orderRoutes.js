@@ -4,7 +4,7 @@ const orderRoutes = express.Router();
 const tokenVerification = require("../middleware/authMiddleware");
 
 orderRoutes.get("/", orderController.index);
-orderRoutes.post("/", orderController.store);
+orderRoutes.post("/", tokenVerification, orderController.store);
 orderRoutes.delete("/", tokenVerification, orderController.destroy);
 orderRoutes.patch("/", tokenVerification, orderController.update);
 
