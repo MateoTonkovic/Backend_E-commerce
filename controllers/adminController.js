@@ -6,12 +6,21 @@ async function login(req, res) {
   const admin = await Admin.findOne({ where: { email: req.body.email } });
   if (!admin) return res.sendStatus(404);
 
-  if (!bcrypt.compareSync(req.body.password, admin.password)) return res.sendStatus(403);
+  if (!bcrypt.compareSync(req.body.password, admin.password))
+    return res.sendStatus(403);
 
-  const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET);
+  const token = jwt.sign(
+    { id: admin.id, email: admin.email },
+    process.env.JWT_SECRET
+  );
   res.json({ accesToken: token });
+}
+async function show(req, res) {
+  const admin = await Admin.findAll();
+  res.json(admin);
 }
 
 module.exports = {
   login,
+  show,
 };
