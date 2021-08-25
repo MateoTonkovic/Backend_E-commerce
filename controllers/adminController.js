@@ -15,12 +15,25 @@ async function login(req, res) {
   );
   res.json({ accesToken: token });
 }
+
 async function show(req, res) {
   const admin = await Admin.findAll();
   res.json(admin);
+}
+async function destroy(req, res) {
+  const admin = await Admin.findByPk(req.user.id);
+  if (admin.id === req.user.id) {
+    await Admin.destroy({ where: { id: req.body.id } });
+    return res.sendStatus(200);
+  }
+
+  if (Number(req.user.id) !== Number(req.body.id)) return res.sendStatus(403);
+  await Admin.destroy({ where: { id: req.body.id } });
+  res.sendStatus(200);
 }
 
 module.exports = {
   login,
   show,
+  destroy,
 };

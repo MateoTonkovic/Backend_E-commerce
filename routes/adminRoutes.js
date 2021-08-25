@@ -6,5 +6,6 @@ const tokenVerification = require("../middleware/authMiddleware");
 
 adminRoutes.post("/token", adminController.login);
 adminRoutes.get("/", tokenVerification, adminController.show);
+adminRoutes.delete("/", tokenVerification, adminController.destroy);
 
 module.exports = adminRoutes;
