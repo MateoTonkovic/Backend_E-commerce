@@ -1,6 +1,7 @@
 const { Admin, Product, User } = require("../models");
 const formidable = require("formidable");
 const slugify = require("slugify");
+const { createClient } = require("@supabase/supabase-js");
 
 const store = async (req, res) => {
   const admin = await Admin.findByPk(req.user.id);
@@ -9,12 +10,9 @@ const store = async (req, res) => {
   }
   const form = formidable({
     multiples: false,
-    uploadDir: "./public/img",
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    const path = require("path");
-    const imgName = path.basename(files.photo.path);
     if (files.photo.name === "") {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
@@ -23,7 +21,7 @@ const store = async (req, res) => {
       {
         name: fields.name,
         description: fields.description,
-        photo: imgName,
+        photo: files.photo.name,
         stock: fields.stock,
         bestproduct: fields.bestproduct,
         slug: slugify(fields.name, { replacement: "-" }),
@@ -31,6 +29,19 @@ const store = async (req, res) => {
       },
       { new: true }
     );
+    const supabase = createClient(
+      "https://unyvfpzstnadbdhkxhbb.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
+    );
+    const { data, error } = await supabase.storage
+      .from("papos.photos")
+      .upload(`images/${files.photo.name}`, files.photo, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    console.log(data);
+    console.log(error);
+
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
   });
