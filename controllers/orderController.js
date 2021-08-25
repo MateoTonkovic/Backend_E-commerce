@@ -24,7 +24,11 @@ const store = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const order = await Order.findAll();
+  const order = await Order.findAll(
+    { include: User },
+    { include: Order_Product }
+  );
+  console.log(order);
   res.json(order);
 };
 
