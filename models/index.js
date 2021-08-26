@@ -20,6 +20,7 @@ const Product = require("./Product")(sequelize, Model, DataTypes);
 const Order = require("./Order")(sequelize, Model, DataTypes);
 const Order_Product = sequelize.define("Order_Product", {
   orderId: {
+    primaryKey: false,
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -30,10 +31,12 @@ const Order_Product = sequelize.define("Order_Product", {
   productId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: false,
     references: {
       model: Product,
       key: "id",
     },
+    unique: false,
   },
   qty: {
     type: DataTypes.INTEGER,

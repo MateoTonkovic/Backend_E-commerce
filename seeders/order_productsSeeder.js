@@ -1,27 +1,28 @@
 const faker = require("faker");
 const { Order_Product } = require("../models");
-const productos = require("./products");
+const products = require("./products");
 
 module.exports = async () => {
-  const orders_products = [];
+  try {
+    const orders_products = [];
 
-  
-  console.log(productos);
-  for (let i = 0; i < 30; i++) {
-    const numProducts = Math.round(Math.random() * 6);
-
-    for (let i = 0; i < numProducts; i++) {
-      const id = faker.datatype.number({ min: 1, max: productos.length });
-
-      orders_products.push({
-        orderId: i,
-        productId: id,
-        qty: Math.ceil(Math.random() * 8),
-        unitPrice: productos[id].price,
-      });
+    for (let i = 1; i <= process.env.ORDERS_NUMBER; i++) {
+      const numProducts = Math.ceil(Math.random() * 4);
+      const orderId = i;
+      for (let i = 1; i < numProducts; i++) {
+        const id = faker.datatype.number({ min: 1, max: products.length - 1 });
+        orders_products.push({
+          orderId: orderId,
+          productId: id,
+          qty: Math.ceil(Math.random() * 8),
+          unitPrice: products[id - 1].price,
+        });
+      }
     }
-  }
 
-  await Order.bulkCreate(orders_products);
-  console.log("[Database] Se corrió el seeder de orders_products.");
+    await Order_Product.bulkCreate(orders_products);
+    console.log("[Database] Se corrió el seeder de orders_products.");
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -1,4 +1,4 @@
-const productos = [
+const products = [
   {
     name: "Adidas A87",
     description: "Championes para correr Adidas con suela de caucho.",
@@ -242,4 +242,4 @@ const productos = [
   },
 ];
 
-module.export = { productos };
+module.exports =  products ;
