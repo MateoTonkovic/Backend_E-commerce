@@ -7,9 +7,9 @@ module.exports = async () => {
     const orders_products = [];
 
     for (let i = 1; i <= process.env.ORDERS_NUMBER; i++) {
-      const numProducts = Math.ceil(Math.random() * 4);
+      const numProducts = Math.ceil(Math.random() * 2);
       const orderId = i;
-      for (let i = 1; i < numProducts; i++) {
+      for (let j = 1; j <= numProducts; j++) {
         const id = faker.datatype.number({ min: 1, max: products.length - 1 });
         orders_products.push({
           orderId: orderId,
