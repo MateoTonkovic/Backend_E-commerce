@@ -33,6 +33,7 @@ const store = async (req, res) => {
       "https://unyvfpzstnadbdhkxhbb.supabase.co",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
     );
+    console.log(files.photo)
     await supabase.storage
       .from("papos.photos")
       .upload(`images/${files.photo.name}`, files.photo, {

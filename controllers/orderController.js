@@ -1,4 +1,4 @@
-const { Admin, Order, Order_Product, User } = require("../models");
+const { Admin, Order, Order_Product, User, Product } = require("../models");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
@@ -24,9 +24,9 @@ const store = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const order = await Order.findAll();
-  console.log(order);
-  res.json(order);
+  const orders = await Order.findAll({ include: [Product, User] });
+  console.log("asda ", orders[0].products[0].Order_Product);
+  res.json(orders);
 };
 
 const destroy = async (req, res) => {
