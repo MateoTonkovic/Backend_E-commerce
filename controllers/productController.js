@@ -2,6 +2,7 @@ const { Admin, Product, User } = require("../models");
 const formidable = require("formidable");
 const slugify = require("slugify");
 const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
 
 const store = async (req, res) => {
   const admin = await Admin.findByPk(req.user.id);
@@ -17,6 +18,7 @@ const store = async (req, res) => {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
+
     const product = await Product.create(
       {
         name: fields.name,
@@ -26,6 +28,7 @@ const store = async (req, res) => {
         bestproduct: fields.bestproduct,
         slug: slugify(fields.name, { replacement: "-" }),
         price: fields.price,
+        categoryId: fields.categoryId,
       },
       { new: true }
     );
@@ -33,13 +36,18 @@ const store = async (req, res) => {
       "https://unyvfpzstnadbdhkxhbb.supabase.co",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
     );
-    console.log(files.photo)
-    await supabase.storage
-      .from("papos.photos")
-      .upload(`images/${files.photo.name}`, files.photo, {
-        cacheControl: "3600",
-        upsert: false,
-      });
+
+    const { data, error } = await supabase.storage
+      .from("papos")
+      .upload(
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        }
+      );
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
@@ -88,6 +96,7 @@ const update = async (req, res) => {
         bestproduct: fields.bestproduct,
         slug: slugify(fields.name, { replacement: "-" }),
         price: fields.price,
+        categoryId: fields.categoryId,
       },
       {
         where: {
@@ -100,11 +109,16 @@ const update = async (req, res) => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
     );
     const { data, error } = await supabase.storage
-      .from("papos.photos")
-      .upload(`images/${files.photo.name}`, files.photo, {
-        cacheControl: "3600",
-        upsert: false,
-      });
+      .from("papos")
+      .upload(
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        }
+      );
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
