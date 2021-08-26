@@ -1,4 +1,5 @@
 const faker = require("faker");
+const _ = require("lodash");
 const { Order_Product } = require("../models");
 const products = require("./products");
 
@@ -7,15 +8,15 @@ module.exports = async () => {
     const orders_products = [];
 
     for (let i = 1; i <= process.env.ORDERS_NUMBER; i++) {
-      const numProducts = Math.ceil(Math.random() * 2);
-      const orderId = i;
-      for (let j = 1; j <= numProducts; j++) {
-        const id = faker.datatype.number({ min: 1, max: products.length - 1 });
+      const numProducts = _.random(1, 5);
+      const selectedProducts = _.sampleSize(products, numProducts);
+
+      for (const product of selectedProducts) {
         orders_products.push({
-          orderId: orderId,
-          productId: id,
-          qty: Math.ceil(Math.random() * 8),
-          unitPrice: products[id - 1].price,
+          orderId: i,
+          productId: product.id,
+          qty: _.random(1, 8),
+          unitPrice: product.price,
         });
       }
     }

@@ -25,7 +25,6 @@ const store = async (req, res) => {
 
 const index = async (req, res) => {
   const orders = await Order.findAll({ include: [Product, User] });
-  console.log("asda ", orders[0].products[0].Order_Product);
   res.json(orders);
 };
 

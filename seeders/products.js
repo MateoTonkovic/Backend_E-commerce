@@ -1,5 +1,6 @@
 const products = [
   {
+    id: 1,
     name: "Adidas A87",
     description: "Championes para correr Adidas con suela de caucho.",
     photo: "adidas.png",
@@ -10,6 +11,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 2,
     name: "Chinelas Adidas",
     description: "Chinelas Adidas rosadas, muy confortables.",
     photo: "chinelasadidas.png",
@@ -20,6 +22,7 @@ const products = [
     categoryId: 1,
   },
   {
+    id: 3,
     name: "Zapatos de futbol Ziptop",
     description:
       "Calzado para football con tapones de metal, aerodinámicos y ergonómicos.",
@@ -31,6 +34,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 4,
     name: "Zapatos de futbol Adidas",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "footballadidas.png",
@@ -41,6 +45,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 5,
     name: "Zapatos de Golf",
     description: "Calzado de cuero para jugar al golf.",
     photo: "golf.png",
@@ -51,6 +56,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 6,
     name: "Heel Trainers Nike",
     description: "Trainers Nike con taco alto.",
     photo: "heels.png",
@@ -61,6 +67,7 @@ const products = [
     categoryId: 1,
   },
   {
+    id: 7,
     name: "Heel Trainers Converse",
     description: "Trainers Converse con taco alto.",
     photo: "heels2.png",
@@ -71,6 +78,7 @@ const products = [
     categoryId: 1,
   },
   {
+    id: 8,
     name: "Championes Reebok",
     description: "Calzado reebok confortable.",
     photo: "reebok.png",
@@ -81,6 +89,7 @@ const products = [
     categoryId: 1,
   },
   {
+    id: 9,
     name: "Running Sneakers",
     description: "Calzado para correr, aerodinámicos y colorido.",
     photo: "running.png",
@@ -91,6 +100,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 10,
     name: "Trainer JWT",
     description: "Calzado casual y confortable.",
     photo: "whitetrainer.png",
@@ -101,6 +111,7 @@ const products = [
     categoryId: 1,
   },
   {
+    id: 11,
     name: "Zapatos",
     description: "Zapatos de vestir negros.",
     photo: "zapato.png",
@@ -111,6 +122,7 @@ const products = [
     categoryId: 4,
   },
   {
+    id: 12,
     name: "Zapatos 1",
     description: "Zapatos de vestir marrones.",
     photo: "zapato1.png",
@@ -121,6 +133,7 @@ const products = [
     categoryId: 4,
   },
   {
+    id: 13,
     name: "Zapatos 2",
     description: "Zapatos de vestir marrones.",
     photo: "zapato2.png",
@@ -131,6 +144,7 @@ const products = [
     categoryId: 4,
   },
   {
+    id: 14,
     name: "Zapatos 3",
     description: "Zapatos de vestir marrones.",
     photo: "zapato3.png",
@@ -141,6 +155,7 @@ const products = [
     categoryId: 4,
   },
   {
+    id: 15,
     name: "Zapatos 4",
     description: "Zapatos de vestir marrones.",
     photo: "zapato4.png",
@@ -151,6 +166,7 @@ const products = [
     categoryId: 4,
   },
   {
+    id: 16,
     name: "Zapatos Balenciaga",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "balenciaga1.png",
@@ -161,6 +177,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 17,
     name: "Zapatos Balenciaga 2",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "balencia2.png",
@@ -171,6 +188,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 18,
     name: "Trainers Nike",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "nike1.png",
@@ -181,6 +199,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 19,
     name: "Trainers Nike 2",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "zapa.png",
@@ -191,6 +210,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 20,
     name: "Medias Nike",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "mediasNike.png",
@@ -201,6 +221,7 @@ const products = [
     categoryId: 3,
   },
   {
+    id: 21,
     name: "Zapatilla prada",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "preada.png",
@@ -211,6 +232,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 22,
     name: "Zapatilla Prada 2",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "prada2.png",
@@ -221,6 +243,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 23,
     name: "Zapatilla Tommy",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "tommyH.png",
@@ -231,6 +254,7 @@ const products = [
     categoryId: 2,
   },
   {
+    id: 24,
     name: "Zapatilla Tommy 2",
     description: "Calzado para football, aerodinámicos y ergonómicos.",
     photo: "tommyH2.png",
@@ -242,4 +266,4 @@ const products = [
   },
 ];
 
-module.exports =  products ;
+module.exports = products;
