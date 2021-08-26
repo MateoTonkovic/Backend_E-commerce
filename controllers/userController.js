@@ -47,10 +47,14 @@ async function destroy(req, res) {
   res.sendStatus(200);
 }
 
-async function show(req, res) {
-
+async function showAll(req, res) {
   const users = await User.findAll();
   res.json(users);
 }
 
-module.exports = { store, login, update, destroy, show };
+async function show(req, res) {
+  const user = await User.findByPk(req.user.id);
+  res.json(user);
+}
+
+module.exports = { store, login, update, destroy, show, showAll };

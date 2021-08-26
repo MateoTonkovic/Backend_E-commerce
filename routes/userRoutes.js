@@ -7,6 +7,7 @@ userRouter.post("/", userController.store);
 userRouter.post("/token", userController.login);
 userRouter.patch("/", tokenVerification, userController.update);
 userRouter.delete("/", tokenVerification, userController.destroy);
-userRouter.get("/", tokenVerification, userController.show);
+userRouter.get("/", tokenVerification, userController.showAll);
+userRouter.get("/user", tokenVerification, userController.show);
 
 module.exports = userRouter;
