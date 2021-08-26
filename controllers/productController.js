@@ -104,8 +104,6 @@ const update = async (req, res) => {
         cacheControl: "3600",
         upsert: false,
       });
-    console.log(data);
-    console.log(error);
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
@@ -113,12 +111,10 @@ const update = async (req, res) => {
 };
 
 const bestProduct = async (req, res) => {
-  console.log(req.body);
   const product = await Product.update(
     { bestproduct: req.body.bestProduct },
     { where: { id: req.body.id } }
   );
-  console.log(product);
   res.json(product);
 };
 module.exports = { store, index, destroy, update, show, bestProduct };
