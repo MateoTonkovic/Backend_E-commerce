@@ -40,12 +40,12 @@ const store = async (req, res) => {
     const { data, error } = await supabase.storage
       .from("papos")
       .upload(
-        `images/${files.photo.name}`,
-        fs.createReadStream(files.papos.path),
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
         {
           cacheControl: "3600",
           upsert: false,
-          contentType: files.papos.type,
+          contentType: files.photo.type,
         }
       );
 
@@ -109,11 +109,16 @@ const update = async (req, res) => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
     );
     const { data, error } = await supabase.storage
-      .from("papos.photos")
-      .upload(`images/${files.photo.name}`, files.photo, {
-        cacheControl: "3600",
-        upsert: false,
-      });
+      .from("papos")
+      .upload(
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        }
+      );
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
