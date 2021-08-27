@@ -23,6 +23,11 @@ const store = async (req, res) => {
     });
   });
 
+  const orderMail = await Order.findOne({
+    include: [Product, User],
+    where: { id: req.body.id },
+  });
+
   res.json(order);
   /*     sendMail(fields.title, fields.content); */
 };
