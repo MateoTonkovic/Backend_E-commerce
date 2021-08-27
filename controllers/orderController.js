@@ -67,4 +67,17 @@ const update = async (req, res) => {
   res.json(order);
 };
 
-module.exports = { store, index, destroy, update };
+const show = async (req, res) => {
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.sendStatus(403);
+  }
+  const orders = await Order.findAll(
+    { where: { id: user.id } },
+    { include: [Product, User] }
+  );
+  res.json(orders);
+};
+
+
+module.exports = { store, index, destroy, update, show };
