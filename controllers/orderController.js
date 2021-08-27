@@ -1,5 +1,6 @@
 const { Admin, Order, Order_Product, User, Product } = require("../models");
 const slugify = require("slugify");
+const sendMail = require("../utils/sendMail.js");
 
 const store = async (req, res) => {
   const user = await User.findByPk(req.user.id);
@@ -25,11 +26,11 @@ const store = async (req, res) => {
 
   const orderMail = await Order.findOne({
     include: [Product, User],
-    where: { id: req.body.id },
+    where: { id: order.id },
   });
 
-  res.json(order);
-  /*     sendMail(fields.title, fields.content); */
+  sendMail(orderMail.id, orderMail.user.firstname);
+  res.json(orderMail);
 };
 
 const index = async (req, res) => {
