@@ -2,8 +2,8 @@ const { Admin, Order, Order_Product, User, Product } = require("../models");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
-  const admin = await Admin.findByPk(req.user.id);
-  if (!admin) {
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
     return res.sendStatus(403);
   }
   await User.update(req.body.user, { where: { id: req.user.id } });
