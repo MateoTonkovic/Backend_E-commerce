@@ -37,6 +37,9 @@ async function update(req, res) {
 
 async function destroy(req, res) {
   const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   if (admin.id === req.user.id) {
     await User.destroy({ where: { id: req.body.id } });
     return res.sendStatus(200);
@@ -48,6 +51,10 @@ async function destroy(req, res) {
 }
 
 async function showAll(req, res) {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   const users = await User.findAll();
   res.json(users);
 }

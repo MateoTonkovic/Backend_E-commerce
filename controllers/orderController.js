@@ -2,6 +2,10 @@ const { Admin, Order, Order_Product, User, Product } = require("../models");
 const slugify = require("slugify");
 
 const store = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   await User.update(req.body.user, { where: { id: req.user.id } });
   const order = await Order.create(
     {
@@ -24,6 +28,10 @@ const store = async (req, res) => {
 };
 
 const index = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   const orders = await Order.findAll({ include: [Product, User] });
   res.json(orders);
 };

@@ -8,6 +8,10 @@ productRoutes.get("/:slug", productController.show);
 productRoutes.post("/", tokenVerification, productController.store);
 productRoutes.delete("/", tokenVerification, productController.destroy);
 productRoutes.patch("/", tokenVerification, productController.update);
-productRoutes.patch("/bestproduct", productController.bestProduct);
+productRoutes.patch(
+  "/bestproduct",
+  tokenVerification,
+  productController.bestProduct
+);
 
 module.exports = productRoutes;

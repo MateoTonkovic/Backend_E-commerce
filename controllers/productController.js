@@ -126,6 +126,10 @@ const update = async (req, res) => {
 };
 
 const bestProduct = async (req, res) => {
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
   const product = await Product.update(
     { bestproduct: req.body.bestProduct },
     { where: { id: req.body.id } }

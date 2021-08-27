@@ -17,11 +17,19 @@ async function login(req, res) {
 }
 
 async function show(req, res) {
-  const admin = await Admin.findAll();
-  res.json(admin);
+  const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
+  const admins = await Admin.findAll();
+  res.json(admins);
 }
 async function destroy(req, res) {
   const admin = await Admin.findByPk(req.user.id);
+  if (!admin) {
+    return res.sendStatus(403);
+  }
+
   if (admin.id === req.user.id) {
     await Admin.destroy({ where: { id: req.body.id } });
     return res.sendStatus(200);
