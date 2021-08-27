@@ -72,12 +72,23 @@ const show = async (req, res) => {
   if (!user) {
     return res.sendStatus(403);
   }
-  const orders = await Order.findAll(
-    { where: { id: user.id } },
-    { include: [Product, User] }
-  );
+  const orders = await Order.findAll({
+    include: [Product, User],
+    where: { userId: user.id },
+  });
   res.json(orders);
 };
 
+const showOne = async (req, res) => {
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.sendStatus(403);
+  }
+  const orders = await Order.findOne({
+    include: Product,
+    where: { id: req.body.id },
+  });
+  res.json(orders);
+};
 
-module.exports = { store, index, destroy, update, show };
+module.exports = { store, index, destroy, update, show, showOne };

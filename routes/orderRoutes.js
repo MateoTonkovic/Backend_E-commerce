@@ -8,5 +8,6 @@ orderRoutes.post("/", tokenVerification, orderController.store);
 orderRoutes.delete("/", tokenVerification, orderController.destroy);
 orderRoutes.patch("/", tokenVerification, orderController.update);
 orderRoutes.get("/show", tokenVerification, orderController.show);
+orderRoutes.post("/showOne", tokenVerification, orderController.showOne);
 
 module.exports = orderRoutes;
