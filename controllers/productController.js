@@ -33,21 +33,16 @@ const store = async (req, res) => {
       { new: true }
     );
     const supabase = createClient(
-      "https://unyvfpzstnadbdhkxhbb.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
+      `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
     );
 
-    const { data, error } = await supabase.storage
+    await supabase.storage
       .from("papos")
-      .upload(
-        `image/${files.photo.name}`,
-        fs.createReadStream(files.photo.path),
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: files.photo.type,
-        }
-      );
+      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: files.photo.type,
+      });
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
@@ -68,8 +63,14 @@ const destroy = async (req, res) => {
   if (!admin) {
     return res.sendStatus(403);
   }
-
+  const product = await Product.findOne({ where: { id: req.body.id } });
   await Product.destroy({ where: { id: req.body.id } });
+
+  const supabase = createClient(
+    `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
+  );
+  await supabase.storage.from("papos").remove([`image/${product.photo}`]);
+
   return res.sendStatus(200);
 };
 
@@ -78,6 +79,7 @@ const update = async (req, res) => {
   if (!admin) {
     return res.sendStatus(403);
   }
+  const product = await Product.findOne({ where: { id: req.body.id } }); //fijarse le mandamos el id o el name(linea 119) por el body
   const form = formidable({
     multiples: false,
     keepExtensions: true,
@@ -105,20 +107,16 @@ const update = async (req, res) => {
       }
     );
     const supabase = createClient(
-      "https://unyvfpzstnadbdhkxhbb.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI5NzI2ODc3LCJleHAiOjE5NDUzMDI4Nzd9.OVxPQwXN-5qMGGCT8Pk49MuPEflhzb83MYejJppCbag"
+      `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
     );
-    const { data, error } = await supabase.storage
+    await supabase.storage
       .from("papos")
-      .upload(
-        `image/${files.photo.name}`,
-        fs.createReadStream(files.photo.path),
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: files.photo.type,
-        }
-      );
+      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: files.photo.type,
+      });
+    await supabase.storage.from("papos").remove([`image/${req.body.name}`]); //Chequear que se envía name de photo en el body
 
     res.json(product);
     /*     sendMail(fields.title, fields.content); */
