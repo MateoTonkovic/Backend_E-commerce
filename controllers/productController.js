@@ -18,7 +18,12 @@ const store = async (req, res) => {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
-
+    const slug = slugify(fields.name, { replacement: "-" });
+    const nameExist = await Product.findOne({ where: { name: fields.name } });
+    const slugExist = await Product.findOne({ where: { slug: slug } });
+    if (nameExist || slugExist) {
+      res.sendStatus(409);
+    }
     const product = await Product.create(
       {
         name: fields.name,
@@ -26,25 +31,35 @@ const store = async (req, res) => {
         photo: files.photo.name,
         stock: fields.stock,
         bestproduct: fields.bestproduct,
-        slug: slugify(fields.name, { replacement: "-" }),
+        slug: slug,
         price: fields.price,
         categoryId: fields.categoryId,
       },
       { new: true }
     );
-    const supabase = createClient(
-      `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
-    );
+    try {
+ 
+      const supabase = createClient(
+        process.env.SUPABASE_URL,
+        process.env.SUPABASE_KEY
+      );
 
-    await supabase.storage
-      .from("papos")
-      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: files.photo.type,
-      });
+      await supabase.storage
+        .from("papos")
+        .upload(
+          `image/${files.photo.name}`,
+          fs.createReadStream(files.photo.path),
+          {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: files.photo.type,
+          }
+        );
 
-    res.json(product);
+      res.json(product);
+    } catch (error) {
+      console.log(error);
+    }
     /*     sendMail(fields.title, fields.content); */
   });
 };
@@ -111,11 +126,15 @@ const update = async (req, res) => {
     );
     await supabase.storage
       .from("papos")
-      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: files.photo.type,
-      });
+      .upload(
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        }
+      );
     await supabase.storage.from("papos").remove([`image/${req.body.name}`]); //Chequear que se envía name de photo en el body
 
     res.json(product);
