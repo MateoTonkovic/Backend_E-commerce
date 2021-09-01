@@ -80,7 +80,13 @@ const destroy = async (req, res) => {
     process.env.SUPABASE_URL,
     process.env.SUPABASE_PRIVATE_KEY
   );
-  await supabase.storage.from("papos").remove([`image/${product.photo}`]);
+  if (req.body.id <= process.env.PHOTOS_QTY) {
+    console.log(
+      "El archivo de la imagen no se elimina porque corresponde al seeder original"
+    );
+  } else {
+    await supabase.storage.from("papos").remove([`image/${product.photo}`]);
+  }
 
   return res.sendStatus(200);
 };
@@ -90,7 +96,7 @@ const update = async (req, res) => {
   if (!admin) {
     return res.sendStatus(403);
   }
-  const product = await Product.findOne({ where: { id: req.body.id } }); //fijarse le mandamos el id o el name(linea 119) por el body
+  const product = await Product.findOne({ where: { id: req.body.id } });
   const form = formidable({
     multiples: false,
     keepExtensions: true,
@@ -100,7 +106,7 @@ const update = async (req, res) => {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
-    const product = await Product.update(
+    const updatedProduct = await Product.update(
       {
         name: fields.name,
         description: fields.description,
@@ -128,9 +134,15 @@ const update = async (req, res) => {
         upsert: false,
         contentType: files.photo.type,
       });
-    await supabase.storage.from("papos").remove([`image/${req.body.name}`]); //Chequear que se envía name de photo en el body
+    if (req.body.id <= process.env.PHOTOS_QTY) {
+      console.log(
+        "El archivo de la imagen no se elimina porque corresponde al seeder original"
+      );
+    } else {
+      await supabase.storage.from("papos").remove([`image/${product.photo}`]);
+    }
 
-    res.json(product);
+    res.json(updatedProduct);
     /*     sendMail(fields.title, fields.content); */
   });
 };
