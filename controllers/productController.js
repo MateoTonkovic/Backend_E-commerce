@@ -1,4 +1,4 @@
-const { Admin, Product, User } = require("../models");
+const { Admin, Product } = require("../models");
 const formidable = require("formidable");
 const slugify = require("slugify");
 const { createClient } = require("@supabase/supabase-js");
