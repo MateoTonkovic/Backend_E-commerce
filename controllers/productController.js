@@ -3,6 +3,7 @@ const formidable = require("formidable");
 const slugify = require("slugify");
 const { createClient } = require("@supabase/supabase-js");
 const fs = require("fs");
+const { Console } = require("console");
 
 const store = async (req, res) => {
   const admin = await Admin.findByPk(req.user.id);
@@ -13,48 +14,58 @@ const store = async (req, res) => {
     multiples: false,
     keepExtensions: true,
   });
+
   form.parse(req, async (err, fields, files) => {
+    const slug = slugify(fields.name, { replacement: "-" });
+
+    const nameExist = await Product.findOne({ where: { name: fields.name } });
+    const slugExist = await Product.findOne({ where: { slug: slug } });
+
     if (files.photo.name === "") {
       const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
-    const slug = slugify(fields.name, { replacement: "-" });
-    const nameExist = await Product.findOne({ where: { name: fields.name } });
-    const slugExist = await Product.findOne({ where: { slug: slug } });
+
     if (nameExist || slugExist) {
       res.sendStatus(409);
-    }
-    const product = await Product.create(
-      {
-        name: fields.name,
-        description: fields.description,
-        photo: files.photo.name,
-        stock: fields.stock,
-        bestproduct: fields.bestproduct,
-        slug: slug,
-        price: fields.price,
-        categoryId: fields.categoryId,
-      },
-      { new: true }
-    );
-    try {
-      const supabase = createClient(
-        process.env.SUPABASE_URL,
-        process.env.SUPABASE_PRIVATE_KEY
+    } else {
+      const product = await Product.create(
+        {
+          name: fields.name,
+          description: fields.description,
+          photo: files.photo.name,
+          stock: fields.stock,
+          bestproduct: fields.bestproduct,
+          slug: slug,
+          price: fields.price,
+          categoryId: fields.categoryId,
+        },
+        { new: true }
       );
+      try {
+        const supabase = createClient(
+          process.env.SUPABASE_URL,
+          process.env.SUPABASE_PRIVATE_KEY
+        );
 
-      await supabase.storage
-        .from("papos")
-        .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: files.photo.type,
-        });
+        await supabase.storage
+          .from("papos")
+          .upload(
+            `image/${files.photo.name}`,
+            fs.createReadStream(files.photo.path),
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType: files.photo.type,
+            }
+          );
 
-      res.json(product);
-    } catch (error) {
-      console.log(error);
+        res.json(product);
+      } catch (error) {
+        console.log(error);
+      }
     }
+
     /*     sendMail(fields.title, fields.content); */
   });
 };
@@ -123,11 +134,15 @@ const update = async (req, res) => {
     );
     await supabase.storage
       .from("papos")
-      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: files.photo.type,
-      });
+      .upload(
+        `image/${files.photo.name}`,
+        fs.createReadStream(files.photo.path),
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        }
+      );
     await supabase.storage.from("papos").remove([`image/${req.body.name}`]); //Chequear que se envía name de photo en el body
 
     res.json(product);
