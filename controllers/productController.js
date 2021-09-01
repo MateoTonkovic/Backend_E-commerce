@@ -38,23 +38,18 @@ const store = async (req, res) => {
       { new: true }
     );
     try {
- 
       const supabase = createClient(
         process.env.SUPABASE_URL,
-        process.env.SUPABASE_KEY
+        process.env.SUPABASE_PRIVATE_KEY
       );
 
       await supabase.storage
         .from("papos")
-        .upload(
-          `image/${files.photo.name}`,
-          fs.createReadStream(files.photo.path),
-          {
-            cacheControl: "3600",
-            upsert: false,
-            contentType: files.photo.type,
-          }
-        );
+        .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        });
 
       res.json(product);
     } catch (error) {
@@ -82,7 +77,8 @@ const destroy = async (req, res) => {
   await Product.destroy({ where: { id: req.body.id } });
 
   const supabase = createClient(
-    `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_PRIVATE_KEY
   );
   await supabase.storage.from("papos").remove([`image/${product.photo}`]);
 
@@ -122,19 +118,16 @@ const update = async (req, res) => {
       }
     );
     const supabase = createClient(
-      `${process.env.SUPABASE_URL}, ${process.env.SUPABASE_TOKEN}`
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_PRIVATE_KEY
     );
     await supabase.storage
       .from("papos")
-      .upload(
-        `image/${files.photo.name}`,
-        fs.createReadStream(files.photo.path),
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: files.photo.type,
-        }
-      );
+      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: files.photo.type,
+      });
     await supabase.storage.from("papos").remove([`image/${req.body.name}`]); //Chequear que se envía name de photo en el body
 
     res.json(product);
