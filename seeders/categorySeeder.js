@@ -5,7 +5,7 @@ module.exports = async () => {
     { name: "Damas", slug: "damas" },
     { name: "Hombres", slug: "hombres" },
     { name: "Deportes", slug: "deportes" },
-    { name: "zapatos", slug: "zapatos" },
+    { name: "Zapatos", slug: "zapatos" },
   ];
 
   await Category.bulkCreate(categoria);

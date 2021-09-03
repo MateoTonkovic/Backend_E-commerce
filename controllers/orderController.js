@@ -16,6 +16,7 @@ const store = async (req, res) => {
       state: "sin pagar",
       userId: req.user.id,
       uuid: uuid,
+      paymentMethod: req.user.paymentMethod,
     },
     { new: true }
   );
@@ -94,12 +95,12 @@ const showOne = async (req, res) => {
   if (!user) {
     return res.sendStatus(403);
   }
-
-  const orders = await Order.findOne({
-    include: Product,
+  console.log("hola");
+  const order = await Order.findOne({
+    include: [Product, User],
     where: { uuid: req.body.uuid },
   });
-  res.json(orders);
+  res.json(order);
 };
 
 module.exports = { store, index, destroy, update, show, showOne };

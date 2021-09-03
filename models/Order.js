@@ -11,6 +11,9 @@ module.exports = (sequelize, Model, DataTypes) => {
       uuid: {
         type: DataTypes.STRING,
       },
+      paymentMethod: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
