@@ -8,6 +8,9 @@ module.exports = (sequelize, Model, DataTypes) => {
         allowNull: false,
         defaultValue: "sin pagar", // pago, enviado, entregado
       },
+      uuid: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

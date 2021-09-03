@@ -8,12 +8,14 @@ const store = async (req, res) => {
   if (!user) {
     return res.sendStatus(403);
   }
+  const uuid = uuidv4();
   await User.update(req.body.user, { where: { id: req.user.id } });
+
   const order = await Order.create(
     {
       state: "sin pagar",
       userId: req.user.id,
-      uuid: uuidv4(),
+      uuid: uuid,
     },
     { new: true }
   );
@@ -92,9 +94,10 @@ const showOne = async (req, res) => {
   if (!user) {
     return res.sendStatus(403);
   }
+
   const orders = await Order.findOne({
     include: Product,
-    where: { id: req.body.id },
+    where: { uuid: req.body.uuid },
   });
   res.json(orders);
 };

@@ -7,6 +7,7 @@ module.exports = async () => {
   const states = ["sin pagar", "pago", "enviado", "entregado"];
   for (let i = 0; i < process.env.ORDERS_NUMBER; i++) {
     const uuid = uuidv4();
+    console.log(uuid);
     orders.push({
       userId: faker.datatype.number({ min: 1, max: 30 }),
       state: states[Math.floor(Math.random() * states.length)],
