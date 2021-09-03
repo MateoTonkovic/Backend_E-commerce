@@ -1,6 +1,7 @@
 const { Admin, Order, Order_Product, User, Product } = require("../models");
 const slugify = require("slugify");
 const sendMail = require("../utils/sendMail.js");
+const { v4: uuidv4 } = require("uuid");
 
 const store = async (req, res) => {
   const user = await User.findByPk(req.user.id);
@@ -12,6 +13,7 @@ const store = async (req, res) => {
     {
       state: "sin pagar",
       userId: req.user.id,
+      uuid: uuidv4(),
     },
     { new: true }
   );
