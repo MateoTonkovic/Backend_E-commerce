@@ -80,7 +80,6 @@ const show = async (req, res) => {
 };
 
 const destroy = async (req, res) => {
-  console.log("entre");
   const admin = await Admin.findByPk(req.user.id);
   if (!admin) {
     return res.sendStatus(403);
