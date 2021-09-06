@@ -8,9 +8,6 @@ module.exports = async () => {
   const paymentMethod = ["MercadoPago", "Papypal"];
   for (let i = 0; i < process.env.ORDERS_NUMBER; i++) {
     const uuid = uuidv4();
-    console.log(
-      paymentMethod[Math.floor(Math.random() * paymentMethod.length)]
-    );
     orders.push({
       userId: faker.datatype.number({ min: 1, max: 30 }),
       state: states[Math.floor(Math.random() * states.length)],
