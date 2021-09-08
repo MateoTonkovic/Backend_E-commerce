@@ -3,7 +3,6 @@ const formidable = require("formidable");
 const slugify = require("slugify");
 const { createClient } = require("@supabase/supabase-js");
 const fs = require("fs");
-const { Console } = require("console");
 
 const store = async (req, res) => {
   const admin = await Admin.findByPk(req.user.id);
@@ -28,42 +27,43 @@ const store = async (req, res) => {
 
     if (nameExist || slugExist) {
       res.sendStatus(409);
-    } else {
-      const product = await Product.create(
-        {
-          name: fields.name,
-          description: fields.description,
-          photo: files.photo.name,
-          stock: fields.stock,
-          bestproduct: fields.bestproduct,
-          slug: slug,
-          price: fields.price,
-          categoryId: fields.categoryId,
-        },
-        { new: true }
+    }
+    const products = await Product.findAll();
+    const id = products.length + 1;
+    const product = await Product.create({
+      id: id,
+      name: fields.name,
+      description: fields.description,
+      photo: files.photo.name,
+      stock: fields.stock,
+      bestproduct: fields.bestproduct,
+      slug: slug,
+      price: fields.price,
+      categoryId: fields.categoryId,
+    }).catch(function (err) {
+      console.log(err);
+    });
+    try {
+      const supabase = createClient(
+        process.env.SUPABASE_URL,
+        process.env.SUPABASE_PRIVATE_KEY
       );
-      try {
-        const supabase = createClient(
-          process.env.SUPABASE_URL,
-          process.env.SUPABASE_PRIVATE_KEY
+
+      await supabase.storage
+        .from("papos")
+        .upload(
+          `image/${files.photo.name}`,
+          fs.createReadStream(files.photo.path),
+          {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: files.photo.type,
+          }
         );
 
-        await supabase.storage
-          .from("papos")
-          .upload(
-            `image/${files.photo.name}`,
-            fs.createReadStream(files.photo.path),
-            {
-              cacheControl: "3600",
-              upsert: false,
-              contentType: files.photo.type,
-            }
-          );
-
-        res.json(product);
-      } catch (error) {
-        console.log(error);
-      }
+      res.json(product);
+    } catch (error) {
+      console.log(error);
     }
 
     /*     sendMail(fields.title, fields.content); */

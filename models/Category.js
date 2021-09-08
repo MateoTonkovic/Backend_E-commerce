@@ -21,9 +21,5 @@ module.exports = (sequelize, Model, DataTypes) => {
     }
   );
 
-  // User.beforeCreate((user, options) => {
-  //   user.password = bcrypt.hashSync(user.password, 10);
-  // });
-
   return Category;
 };

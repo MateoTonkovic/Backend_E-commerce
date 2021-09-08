@@ -4,7 +4,7 @@ const slugify = require("slugify");
 async function store(req, res) {
   const admin = await Admin.findByPk(req.user.id);
   if (!admin) res.sendStatus(403);
-
+  console.log(req.body);
   const category = await Category.create({
     name: req.body.name,
     slug: slugify(req.body.name, { replacement: "-" }),

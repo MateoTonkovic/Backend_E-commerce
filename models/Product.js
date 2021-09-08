@@ -3,6 +3,12 @@ module.exports = (sequelize, Model, DataTypes) => {
 
   Product.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,10 +47,6 @@ module.exports = (sequelize, Model, DataTypes) => {
       paranoid: true,
     }
   );
-
-  // User.beforeCreate((user, options) => {
-  //   user.password = bcrypt.hashSync(user.password, 10);
-  // });
 
   return Product;
 };
