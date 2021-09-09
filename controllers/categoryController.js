@@ -1,10 +1,9 @@
-const { Category, Admin } = require("../models");
+const { Category, Admin, Product } = require("../models");
 const slugify = require("slugify");
 
 async function store(req, res) {
   const admin = await Admin.findByPk(req.user.id);
   if (!admin) res.sendStatus(403);
-  console.log(req.body);
   const category = await Category.create({
     name: req.body.name,
     slug: slugify(req.body.name, { replacement: "-" }),
@@ -14,6 +13,13 @@ async function store(req, res) {
 
 async function index(req, res) {
   const categories = await Category.findAll();
+  res.json(categories);
+}
+
+async function empty(req, res) {
+  const categories = await Product.findAll({
+    where: { categoryId: req.body.data.id},
+  });
   res.json(categories);
 }
 
@@ -40,4 +46,4 @@ const update = async (req, res) => {
   res.json(200);
 };
 
-module.exports = { store, index, destroy, update };
+module.exports = { store, index, destroy, update, empty };

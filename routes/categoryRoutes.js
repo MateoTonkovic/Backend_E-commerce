@@ -6,6 +6,7 @@ const categoryRoutes = express.Router();
 categoryRoutes.post("/", tokenVerification, categoryController.store);
 categoryRoutes.get("/", categoryController.index);
 categoryRoutes.delete("/", tokenVerification, categoryController.destroy);
-categoryRoutes.patch("/", tokenVerification, categoryController.update)
+categoryRoutes.patch("/", tokenVerification, categoryController.update);
+categoryRoutes.post("/empty", categoryController.empty);
 
 module.exports = categoryRoutes;
