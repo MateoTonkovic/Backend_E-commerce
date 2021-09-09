@@ -21,20 +21,17 @@ const store = async (req, res) => {
     const slugExist = await Product.findOne({ where: { slug: slug } });
 
     if (files.photo.name === "") {
-      const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
 
     if (nameExist || slugExist) {
       res.sendStatus(409);
     }
-    const products = await Product.findAll();
-    const id = products.length + 1;
+    const img = files.photo.name;
     const product = await Product.create({
-      id: id,
       name: fields.name,
       description: fields.description,
-      photo: files.photo.name,
+      photo: img,
       stock: fields.stock,
       bestproduct: fields.bestproduct,
       slug: slug,
@@ -51,15 +48,11 @@ const store = async (req, res) => {
 
       await supabase.storage
         .from("papos")
-        .upload(
-          `image/${files.photo.name}`,
-          fs.createReadStream(files.photo.path),
-          {
-            cacheControl: "3600",
-            upsert: false,
-            contentType: files.photo.type,
-          }
-        );
+        .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.photo.type,
+        });
 
       res.json(product);
     } catch (error) {
@@ -114,14 +107,14 @@ const update = async (req, res) => {
   });
   form.parse(req, async (err, fields, files) => {
     if (files.photo.name === "") {
-      const fs = require("fs");
       fs.unlink(files.photo.path, () => {});
     }
+    const img = files.photo.name;
     const updatedProduct = await Product.update(
       {
         name: fields.name,
         description: fields.description,
-        photo: files.photo.name,
+        photo: img,
         stock: fields.stock,
         bestproduct: fields.bestproduct,
         slug: slugify(fields.name, { replacement: "-" }),
@@ -140,15 +133,11 @@ const update = async (req, res) => {
     );
     await supabase.storage
       .from("papos")
-      .upload(
-        `image/${files.photo.name}`,
-        fs.createReadStream(files.photo.path),
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: files.photo.type,
-        }
-      );
+      .upload(`image/${files.photo.name}`, fs.createReadStream(files.photo.path), {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: files.photo.type,
+      });
     if (req.body.id <= process.env.PHOTOS_QTY) {
       console.log(
         "El archivo de la imagen no se elimina porque corresponde al seeder original"
